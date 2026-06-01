@@ -323,6 +323,11 @@
   footer a { color: var(--green-dim); text-decoration: none; }
   footer .meta { margin-top: 6px; opacity: .7; }
 </style>
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -709,6 +714,17 @@ function loadFromParams() {
 
 loadFromParams();
 calc();
+
+// --- Vercel Web Analytics: engagement + intent events ---
+function vaTrack(name, data) { if (window.va) window.va('event', data ? { name, data } : { name }); }
+let _engaged = false;
+function trackEngage() { if (!_engaged) { _engaged = true; vaTrack('engaged'); } }
+document.addEventListener('input', e => { if (e.target.matches('input[type=range]')) trackEngage(); }, true);
+document.addEventListener('click', e => {
+  if (e.target.closest('.scenario, .model, #ttl button')) trackEngage();
+  if (e.target.closest('#save-btn')) vaTrack('copy_result');
+  if (e.target.closest('#share-btn')) vaTrack('share_link');
+}, true);
 </script>
 </body>
 </html>
