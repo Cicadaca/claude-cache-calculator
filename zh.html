@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>agent-cost :: cache savings</title>
-<meta name="description" content="See how much Claude prompt caching saves you per month. Pick a scenario, drag the sliders, get your real numbers in 30 seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -310,18 +309,18 @@
     <span class="dot on"></span>
     <span>agent-cost.sh</span>
     <span class="sep"></span>
-    <a href="./zh.html" style="color:var(--green-dim);text-decoration:none;">中文 →</a>
+    <a href="./" style="color:var(--green-dim);text-decoration:none;">EN →</a>
   </div>
 
   <h1><span class="prompt">$</span> cache-savings<span class="cursor"></span></h1>
-  <p class="subtitle">Pick a scenario. Know if prompt caching is worth it — in 30 seconds. <b>Pricing updated 2026-06-01</b>.</p>
+  <p class="subtitle">选择场景，30秒看懂缓存要不要开。<b>定价更新于 2026-06-01</b>。</p>
 
   <!-- SCENARIOS -->
   <div class="panel">
     <div class="panel-head"><span class="tag">#</span> scenario</div>
     <div class="panel-body">
       <div class="scenarios" id="scenarios"></div>
-      <div class="scenario-info" id="scenario-info">Daily scripts & tooling · 5K tokens × 20 turns/day · 70% cache hit rate</div>
+      <div class="scenario-info" id="scenario-info">日常脚本、工具开发 · 5K tokens × 20轮/天 · 70% 缓存命中率</div>
     </div>
   </div>
 
@@ -340,7 +339,7 @@
 
       <div class="field">
         <div class="field-top">
-          <span class="field-label">Turns per day <span class="hint">turns/day</span></span>
+          <span class="field-label">每天对话轮数 <span class="hint">turns/day</span></span>
           <span class="field-val" id="v-turns">20</span>
         </div>
         <input type="range" id="turns" min="5" max="300" step="5" value="20">
@@ -348,7 +347,7 @@
 
       <div class="field">
         <div class="field-top">
-          <span class="field-label">Cache hit rate <span class="hint">% reused from cache</span></span>
+          <span class="field-label">缓存命中率 <span class="hint">cache hit rate</span></span>
           <span class="field-val" id="v-hit">70%</span>
         </div>
         <input type="range" id="hit" min="0" max="95" step="5" value="70">
@@ -356,11 +355,11 @@
 
       <div class="field">
         <div class="field-top">
-          <span class="field-label">Cache TTL <span class="hint">write cost</span></span>
+          <span class="field-label">缓存 TTL <span class="hint">write cost</span></span>
         </div>
         <div class="ttl" id="ttl">
-          <button data-ttl="5m" class="active">5 min<span class="mult">write 1.25×</span></button>
-          <button data-ttl="1h">1 hour<span class="mult">write 2×</span></button>
+          <button data-ttl="5m" class="active">5 分钟<span class="mult">write 1.25×</span></button>
+          <button data-ttl="1h">1 小时<span class="mult">write 2×</span></button>
         </div>
       </div>
 
@@ -368,14 +367,14 @@
       <label class="advanced-toggle">
         <input type="checkbox" id="adv-toggle">
         <div class="toggle-box"></div>
-        <span class="toggle-label">Advanced (context size, utilization, etc.)</span>
+        <span class="toggle-label">高级设置（context 大小、使用率等）</span>
       </label>
 
       <!-- advanced panel -->
       <div class="advanced-panel" id="adv-panel">
         <div class="field">
           <div class="field-top">
-            <span class="field-label">Context size <span class="hint">tokens/turn</span></span>
+            <span class="field-label">Context 大小 <span class="hint">tokens/turn</span></span>
             <span class="field-val" id="v-ctx">5K</span>
           </div>
           <input type="range" id="ctx" min="1000" max="200000" step="1000" value="5000">
@@ -383,7 +382,7 @@
 
         <div class="field">
           <div class="field-top">
-            <span class="field-label">Turns per conversation <span class="hint">turns/conv</span></span>
+            <span class="field-label">每对话轮数 <span class="hint">turns/conversation</span></span>
             <span class="field-val" id="v-turns-per-conv">8</span>
           </div>
           <input type="range" id="turns-per-conv" min="1" max="20" value="8">
@@ -391,7 +390,7 @@
 
         <div class="field">
           <div class="field-top">
-            <span class="field-label">Context utilization <span class="hint">utilization</span></span>
+            <span class="field-label">Context 使用率 <span class="hint">utilization</span></span>
             <span class="field-val" id="v-util">70%</span>
           </div>
           <input type="range" id="util" min="10" max="100" value="70">
@@ -399,7 +398,7 @@
 
         <div class="field">
           <div class="field-top">
-            <span class="field-label">Output / input ratio <span class="hint">output ratio</span></span>
+            <span class="field-label">输出/输入比 <span class="hint">output ratio</span></span>
             <span class="field-val" id="v-out-ratio">40%</span>
           </div>
           <input type="range" id="out-ratio" min="10" max="100" value="40">
@@ -413,15 +412,15 @@
   <div class="result">
     <div class="result-label">estimated monthly savings</div>
     <div class="big"><span class="cur">$</span><span id="save">0</span></div>
-    <div class="pct">Caching saves <b id="savepct">0%</b> vs no cache · ~<b id="annual">$0</b>/yr</div>
+    <div class="pct">开缓存比不开省 <b id="savepct">0%</b> · 约 <b id="annual">$0</b>/年</div>
 
     <div class="bars">
       <div class="bar-row">
-        <div class="bl"><span>Without cache</span><span class="amt" id="amt-no">$0/mo</span></div>
+        <div class="bl"><span>不开缓存</span><span class="amt" id="amt-no">$0/mo</span></div>
         <div class="track"><div class="fill nocache" id="bar-no" style="width:100%"></div></div>
       </div>
       <div class="bar-row">
-        <div class="bl"><span>With cache</span><span class="amt" id="amt-yes">$0/mo</span></div>
+        <div class="bl"><span>开缓存</span><span class="amt" id="amt-yes">$0/mo</span></div>
         <div class="track"><div class="fill cache" id="bar-yes" style="width:0%"></div></div>
       </div>
     </div>
@@ -429,14 +428,14 @@
     <div class="hintline"><span class="gt">&gt;&gt;</span><span id="hint">…</span></div>
 
     <div class="cta-row">
-      <button class="cta-btn primary" id="save-btn">Copy result</button>
-      <button class="cta-btn" id="share-btn">Share link</button>
+      <button class="cta-btn primary" id="save-btn">💾 保存结果</button>
+      <button class="cta-btn" id="share-btn">🔗 分享链接</button>
     </div>
   </div>
 
   <footer>
-    Pricing source <a href="https://claude.com/pricing">claude.com/pricing</a>
-    <div class="meta">cache write 5m=1.25× · 1h=2× · cache read=0.1× base input · estimates only</div>
+    数据源 <a href="https://claude.com/pricing">claude.com/pricing</a>
+    <div class="meta">cache write 5m=1.25× · 1h=2× · cache read=0.1× base input · 估算仅供参考</div>
   </footer>
 
 </div>
@@ -454,36 +453,32 @@ const DAYS = 30;
 // Scenario presets
 const SCENARIOS = {
   'tool': {
-    nm: '🔧 Scripts & tools',
-    short: 'Daily scripts & tooling',
-    desc: 'Daily scripts & tooling · 5K tokens × 20 turns/day · 70% cache hit rate',
+    nm: '🔧 小工具开发',
+    desc: '日常脚本、工具开发 · 5K tokens × 20轮/天 · 70% 缓存命中率',
     ctx: 5000,
     turnsPerDay: 20,
     turnsPerConv: 8,
     hit: 70
   },
   'api': {
-    nm: '⚡ API integration',
-    short: 'High-frequency API calls',
-    desc: 'High-frequency API calls · 50K tokens × 100 turns/day · 60% cache hit rate',
+    nm: '⚡ API 集成',
+    desc: '高频 API 调用 · 50K tokens × 100轮/天 · 60% 缓存命中率',
     ctx: 50000,
     turnsPerDay: 100,
     turnsPerConv: 4,
     hit: 60
   },
   'data': {
-    nm: '📊 Data analysis',
-    short: 'Large-scale data processing',
-    desc: 'Large-scale data processing · 200K tokens × 50 turns/day · 80% cache hit rate',
+    nm: '📊 数据分析',
+    desc: '大规模数据处理 · 200K tokens × 50轮/天 · 80% 缓存命中率',
     ctx: 200000,
     turnsPerDay: 50,
     turnsPerConv: 12,
     hit: 80
   },
   'custom': {
-    nm: '⚙️ Custom',
-    short: 'Tune all parameters',
-    desc: 'Manually tune all parameters',
+    nm: '⚙️ 自定义',
+    desc: '手动调整所有参数',
     ctx: 30000,
     turnsPerDay: 50,
     turnsPerConv: 8,
@@ -509,7 +504,7 @@ Object.entries(SCENARIOS).forEach(([k, s]) => {
   const b = document.createElement('button');
   b.className = 'scenario' + (k === state.scenario ? ' active' : '');
   b.dataset.k = k;
-  b.innerHTML = `<span class="nm">${s.nm}</span><span class="desc">${s.short}</span>`;
+  b.innerHTML = `<span class="nm">${s.nm}</span><span class="desc">${s.desc.substring(0, 25)}...</span>`;
   b.onclick = () => applyScenario(k);
   scenariosEl.appendChild(b);
 });
@@ -634,23 +629,23 @@ function calc() {
   // contextual hint
   let h;
   if (state.hit < 50) {
-    h = 'Hit rate of ' + state.hit + '% is low. Pin your system prompt and tool definitions in a fixed order, stable content first, to raise the hit rate significantly.';
+    h = '命中率 ' + state.hit + '% 偏低。固定 system prompt 与工具定义顺序，把稳定内容放最前，能显著拉高命中率。';
   } else if (state.ttl === '1h' && state.hit < 80) {
-    h = '1h cache writes cost 2× as much. At a ' + state.hit + '% hit rate, 5min usually wins — 1h only pays off when the same context is re-read repeatedly within the hour.';
+    h = '1h 缓存写入贵一倍 (2×)。命中率 ' + state.hit + '% 时，多数场景 5min 更划算——只有同一段 context 在 1 小时内被反复读取才回本。';
   } else if (pct > 60) {
-    h = 'Saving ' + pct.toFixed(0) + '%. Your hit rate is already high and caching is near-optimal — focus next on trimming unnecessary output tokens.';
+    h = '省下 ' + pct.toFixed(0) + '%。命中率已经很高，缓存策略接近最优，重点转向减少不必要的 output token。';
   } else {
-    h = 'Each +10% hit rate saves roughly $' + money(noCache * 0.09) + '/mo more. Getting frequently re-read code/docs into the cache region is the biggest lever.';
+    h = '提高命中率每 +10% 大约再省 $' + money(noCache * 0.09) + '/月。让重复读取的代码/文档进入缓存区是最大杠杆。';
   }
   document.getElementById('hint').textContent = h;
 }
 
 // CTA buttons
 document.getElementById('save-btn').onclick = () => {
-  const text = `Claude caching estimate\n\nScenario: ${SCENARIOS[state.scenario].nm}\nModel: ${MODELS[state.model].nm}\nTurns/day: ${state.turnsPerDay}\nCache hit rate: ${state.hit}%\n\nMonthly cost:\n- Without cache: ${document.getElementById('amt-no').textContent}\n- With cache: ${document.getElementById('amt-yes').textContent}`;
+  const text = `Claude 缓存计算结果\n\n场景: ${SCENARIOS[state.scenario].nm}\n模型: ${MODELS[state.model].nm}\n每天对话: ${state.turnsPerDay}\n缓存命中率: ${state.hit}%\n\n月度成本:\n- 无缓存: $${document.getElementById('amt-no').textContent}\n- 有缓存: $${document.getElementById('amt-yes').textContent}`;
   navigator.clipboard.writeText(text).then(() => {
-    document.getElementById('save-btn').textContent = '✓ Copied';
-    setTimeout(() => { document.getElementById('save-btn').textContent = 'Copy result'; }, 2000);
+    document.getElementById('save-btn').textContent = '✓ 已复制';
+    setTimeout(() => { document.getElementById('save-btn').textContent = '💾 保存结果'; }, 2000);
   });
 };
 
@@ -663,8 +658,8 @@ document.getElementById('share-btn').onclick = () => {
   });
   const url = window.location.origin + window.location.pathname + '?' + params.toString();
   navigator.clipboard.writeText(url).then(() => {
-    document.getElementById('share-btn').textContent = '✓ Link copied';
-    setTimeout(() => { document.getElementById('share-btn').textContent = 'Share link'; }, 2000);
+    document.getElementById('share-btn').textContent = '✓ 已复制链接';
+    setTimeout(() => { document.getElementById('share-btn').textContent = '🔗 分享链接'; }, 2000);
   });
 };
 
