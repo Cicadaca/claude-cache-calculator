@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://claude-cache-calculator.vercel.app/sitemap.xml
